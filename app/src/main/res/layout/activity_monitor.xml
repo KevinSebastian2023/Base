@@ -7,7 +7,7 @@
     tools:context=".Monitor">
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/texto_pulsaciones"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/texto_oxigeno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="168dp"
