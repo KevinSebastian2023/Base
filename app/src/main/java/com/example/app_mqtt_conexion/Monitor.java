@@ -105,7 +105,7 @@ public class Monitor extends AppCompatActivity {
                         String a = String.valueOf(Message.charAt(0));
                         String b = String.valueOf(Message.charAt(1));
 
-                        oxigeno.setText(a+b);
+                        oxigeno.setText(a+b+"%");
                     }
 
                     if(Message.length()==6){
@@ -113,7 +113,7 @@ public class Monitor extends AppCompatActivity {
                         String b = String.valueOf(Message.charAt(1));
 
                         String c = String.valueOf(Message.charAt(2));
-                        oxigeno.setText(a+b+c);
+                        oxigeno.setText(a+b+c+"%");
                     }
 
 
