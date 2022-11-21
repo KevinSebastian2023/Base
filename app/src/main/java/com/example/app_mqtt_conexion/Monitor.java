@@ -106,6 +106,7 @@ public class Monitor extends AppCompatActivity {
                         String b = String.valueOf(Message.charAt(1));
 
                         oxigeno.setText(a+b+"%");
+
                     }
 
                     if(Message.length()==6){
