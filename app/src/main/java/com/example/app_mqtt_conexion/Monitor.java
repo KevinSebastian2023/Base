@@ -2,7 +2,9 @@ package com.example.app_mqtt_conexion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +21,7 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class Monitor extends AppCompatActivity {
-
+    Button btn8;
 
     MqttAndroidClient client;
     TextView oxigeno;
@@ -32,6 +34,17 @@ public class Monitor extends AppCompatActivity {
 
         oxigeno = (TextView)findViewById(R.id.texto_oxigeno);
         pulsaciones = (TextView) findViewById(R.id.texto_pulsaciones);
+
+        btn8 = findViewById(R.id.boton_salir);
+
+        btn8.setOnClickListener(view -> {
+
+            Intent intent = new Intent(Monitor.this,MainActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.from_left,R.anim.to_right);
+            finish();
+
+        });
 
 
         String clientId = MqttClient.generateClientId();
