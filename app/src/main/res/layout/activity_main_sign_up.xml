@@ -24,7 +24,7 @@
         app:layout_constraintHorizontal_bias="0.383"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints=""/>
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/id_contraseña"
@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.383"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_correo"
-        android:autofillHints=""/>
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/id_confirmContraseña"
@@ -64,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.383"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_contraseña"
-        android:autofillHints=""/>
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/button_Forgot_Pass"
