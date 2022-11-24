@@ -32,30 +32,38 @@ public class Ubicacion_maps extends AppCompatActivity implements OnMapReadyCallb
         mapFragment.getMapAsync(this);
     }
 
-    @Override
-    public void onMapReady(@NonNull GoogleMap googleMap) {
+
+    public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         this.mMap.setOnMapClickListener(this);
         this.mMap.setOnMapLongClickListener(this);
 
-        LatLng mexico = new LatLng(19.8077463,-99.4077038);
-        mMap.addMarker(new MarkerOptions().position(mexico).title("México"));
+        double latitud = -33.499079;
+        double longitud =  -70.6167882;  // VARIABLES TEMPORALES
+
+        txtLatitud.setText(String.valueOf(latitud));
+        txtLongitud.setText(String.valueOf(longitud));
+
+        LatLng mexico = new LatLng( latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(mexico).title("Ubicacion de la persona monitoreada "));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mexico));
     }
 
+
+
     @Override
-    public void onMapClick(@NonNull LatLng latLng) {
+    public void onMapClick(@NonNull LatLng latLng) {                 // metodo que coloca en las cajas de texto la ubicacion que presionamos en el mapa retorna latitud y longitud
         txtLatitud.setText(String.valueOf(latLng.latitude));
         txtLongitud.setText(String.valueOf(latLng.longitude));
 
         mMap.clear();
-        LatLng mexico = new LatLng(latLng.latitude,latLng.longitude);
-        mMap.addMarker(new MarkerOptions().position(mexico).title(""));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mexico));
+        LatLng PosicionElegida = new LatLng(latLng.latitude,latLng.longitude);
+        mMap.addMarker(new MarkerOptions().position(PosicionElegida).title(""));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(PosicionElegida));
     }
 
     @Override
-    public void onMapLongClick(@NonNull LatLng latLng) {
+    public void onMapLongClick(@NonNull LatLng latLng) {                         // metodo que coloca en las cajas de texto la ubicacion que presionamos por un largo tiempo en el mapa retorna latitud y longitud
         txtLatitud.setText(String.valueOf(latLng.latitude));
         txtLongitud.setText(String.valueOf(latLng.longitude));
 
