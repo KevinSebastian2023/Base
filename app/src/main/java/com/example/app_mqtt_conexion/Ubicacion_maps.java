@@ -44,9 +44,9 @@ public class Ubicacion_maps extends AppCompatActivity implements OnMapReadyCallb
         txtLatitud.setText(String.valueOf(latitud));
         txtLongitud.setText(String.valueOf(longitud));
 
-        LatLng mexico = new LatLng( latitud, longitud);
-        mMap.addMarker(new MarkerOptions().position(mexico).title("Ubicacion de la persona monitoreada "));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mexico));
+        LatLng GPS = new LatLng( latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(GPS).title("Ubicacion de la persona monitoreada "));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(GPS));
     }
 
 
@@ -68,8 +68,8 @@ public class Ubicacion_maps extends AppCompatActivity implements OnMapReadyCallb
         txtLongitud.setText(String.valueOf(latLng.longitude));
 
         mMap.clear();
-        LatLng mexico = new LatLng(latLng.latitude,latLng.longitude);
-        mMap.addMarker(new MarkerOptions().position(mexico).title(""));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mexico));
+        LatLng GPS = new LatLng(latLng.latitude,latLng.longitude);
+        mMap.addMarker(new MarkerOptions().position(GPS).title(""));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(GPS));
     }
 }
