@@ -1,6 +1,8 @@
 package com.example.app_mqtt_conexion;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -30,6 +32,9 @@ public class Ubicacion_maps extends AppCompatActivity implements OnMapReadyCallb
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+
     }
 
 
@@ -38,8 +43,8 @@ public class Ubicacion_maps extends AppCompatActivity implements OnMapReadyCallb
         this.mMap.setOnMapClickListener(this);
         this.mMap.setOnMapLongClickListener(this);
 
-        double latitud = -33.499079;
-        double longitud =  -70.6167882;  // VARIABLES TEMPORALES
+        double latitud = -33.449030;
+        double longitud =  -70.662426;             // VARIABLES TEMPORALES
 
         txtLatitud.setText(String.valueOf(latitud));
         txtLongitud.setText(String.valueOf(longitud));

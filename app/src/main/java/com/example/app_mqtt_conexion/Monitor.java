@@ -44,7 +44,7 @@ public class Monitor extends AppCompatActivity {
             finish();
 
         });
-        btn8 = findViewById(R.id.boton_salir);
+        btn8 = findViewById(R.id.Boton_atras);
 
         btn8.setOnClickListener(view -> {
 
