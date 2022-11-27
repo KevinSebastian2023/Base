@@ -15,7 +15,7 @@ import androidx.core.app.NotificationManagerCompat;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
+import android.app.PendingIntent;                              //librerias necesarias para la notificacion
 import android.app.TaskStackBuilder;
 import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +24,7 @@ import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttCallback;            // LIBRERIAS PARA CONECTAR ANDROID CON EL SERVIDOR MQTT
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
@@ -34,14 +34,14 @@ import java.util.Objects;
 public class Monitor extends AppCompatActivity {
     Button btn8;
     MqttAndroidClient client;
-    TextView oxigeno;
+    TextView oxigeno;                                           //DECLARACION DE VARIABLES A UTILIZAR DE DIFERENTES TIPOS
     TextView pulsaciones;
 
     //variables a utilizar para las notificaciones
 
     private static final String CHANNEL_ID = "NOTIFICACION";
     public static final int NOTIFICACION_ID = 0;
-    PendingIntent pendingIntent;
+    PendingIntent pendingIntent;                                          // VARIABLES Y CANAL DE LA NOTIFICACION QUE USAREMOS
     PendingIntent siPending, noPending;
 
     private static final int PENDING_REQUEST = 5;
@@ -54,7 +54,7 @@ public class Monitor extends AppCompatActivity {
 
 
         oxigeno = (TextView) findViewById(R.id.texto_oxigeno);
-        pulsaciones = (TextView) findViewById(R.id.texto_pulsaciones);
+        pulsaciones = (TextView) findViewById(R.id.texto_pulsaciones);           //CONECTANDO LO VISUAL CON LO LOGICO EN CUANTO A LOS PARAMETROS A TRABAJAR
 
 
         btn8 = findViewById(R.id.Boton_atras);
@@ -77,7 +77,7 @@ public class Monitor extends AppCompatActivity {
             token.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Toast.makeText(Monitor.this, "Conectado ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Monitor.this, "Conectado ", Toast.LENGTH_LONG).show();                     // METODO PARA CONECTAR AL MQTT
                     setSubscription();
 
                 }
@@ -104,17 +104,6 @@ public class Monitor extends AppCompatActivity {
                 if (Objects.equals(topic, "st/r")) {
 
                     pulsaciones.setText(new String(message.getPayload()));  // Recibimos el mensaje desde el MQTT en un recurso de texto tipo Texview para ser mostrado por pantalla al usuario
-
-                    //String Message = message.toString();
-                    //if(Message.equals("1")){
-
-                    // pulsacion.setText("orden recibida");
-
-                    //}
-                    // else {
-
-                    // pulsacion.setText(Message);
-                    // }
 
                 }
 
@@ -152,12 +141,12 @@ public class Monitor extends AppCompatActivity {
                 if (Objects.equals(topic, "st/n")){     //topico y subtopico de la notificacion
 
 
-                    String Message = message.toString();
+                    String Message = message.toString();       // RECIBIMOS EL MENSAJE EN TIPO MQTT PERO LO CAMBIAMOS A STRING PARA PODER TRABAJAR CON SUS METODOS
                     if(Message.equals("1")){
 
-                        setNoPendingIntent();
-                        setSiPendingIntent();
-                        setPendingIntent();
+                        //setNoPendingIntent();   //METODO OPCIONAL SI DESEAMOS EJECUTAR CIERTA ORDEN AL SELCCIONAR NO
+                       // setSiPendingIntent();      //METODO OPCIONAL SI DESEAMOS EJECUTAR CIERTA ORDEN AL SELCCIONAR SI
+                        setPendingIntent();                       // AL RECIBIR EL MENSAJE DE ALERTA  EJECUTAMOS LOS SIGUIENTES METODOS
                         createNotificacionChannel();
                         crearNotificaciones();
                     }
