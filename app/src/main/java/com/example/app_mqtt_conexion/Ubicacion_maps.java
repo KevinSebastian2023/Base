@@ -43,6 +43,9 @@ public class Ubicacion_maps extends AppCompatActivity implements OnMapReadyCallb
         this.mMap.setOnMapClickListener(this);
         this.mMap.setOnMapLongClickListener(this);
 
+
+
+
         double latitud = -33.449030;
         double longitud =  -70.662426;             // VARIABLES TEMPORALES
 
