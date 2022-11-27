@@ -140,11 +140,11 @@ public class Monitor extends AppCompatActivity {
                     }
 
                     if (Message.length() == 6) {
-                        String a = String.valueOf(Message.charAt(0));
-                        String b = String.valueOf(Message.charAt(1));
+                        String a = String.valueOf(Message.charAt(0)); // si deseamos immprimir un valor mayor a 100 elegimos este metodo
+                        String b = String.valueOf(Message.charAt(1)); // pero en nuestro caso no puedde ser mayor a 100 % el nivel de oxigenacion en la sangre
 
-                        String c = String.valueOf(Message.charAt(2));
-                        oxigeno.setText(a + b + c + "%");
+                        String c = String.valueOf(Message.charAt(2)); // por lo tanto imprimimos 100
+                        oxigeno.setText("100%");
                     }
 
 
