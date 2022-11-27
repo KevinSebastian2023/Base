@@ -17,7 +17,6 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.content.Intent;
 import android.graphics.Color;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -34,7 +33,6 @@ import java.util.Objects;
 
 public class Monitor extends AppCompatActivity {
     Button btn8;
-    Button boton_mapa;
     MqttAndroidClient client;
     TextView oxigeno;
     TextView pulsaciones;
@@ -57,16 +55,8 @@ public class Monitor extends AppCompatActivity {
 
         oxigeno = (TextView) findViewById(R.id.texto_oxigeno);
         pulsaciones = (TextView) findViewById(R.id.texto_pulsaciones);
-        boton_mapa = findViewById(R.id.Cambiar_ubicacion);
 
-        boton_mapa.setOnClickListener(view -> {
 
-            Intent intent = new Intent(Monitor.this, Ubicacion_maps.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.to_left, R.anim.from_rigth);
-            finish();
-
-        });
         btn8 = findViewById(R.id.Boton_atras);
 
         btn8.setOnClickListener(view -> {
@@ -212,10 +202,10 @@ public class Monitor extends AppCompatActivity {
     private void crearNotificaciones(){
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID);
         builder.setSmallIcon(R.drawable.corazon);
-        builder.setContentTitle("Nombre Notificacion");
-        builder.setContentText("Texto Notificación");
+        builder.setContentTitle("Anomalia Detectada");
+        builder.setContentText("Ver ubicacion GPS del usuario ");
         builder.setStyle(new NotificationCompat.BigTextStyle()
-                .bigText("Texto largo para que no cabe en una única línea"));
+                .bigText("Anomalia detectada del usuario , presiona para ver su ubicacion actual "));
         builder.setColor(Color.BLUE);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.MAGENTA,1000,1000);
@@ -224,13 +214,13 @@ public class Monitor extends AppCompatActivity {
         builder.setDefaults(Notification.DEFAULT_SOUND);
         builder.setContentIntent(pendingIntent);
         builder.setNumber(7);
-        builder.addAction(R.drawable.ic_launcher_background,"Sí", siPending);
-        builder.addAction(R.drawable.ic_launcher_background,"No", noPending);
+        //builder.addAction(R.drawable.ic_launcher_background,"Sí", siPending);   // METODO PARA PREGUNTAR SI DESEA HACER ALGO DESDE LA NOTIFICACION
+        //builder.addAction(R.drawable.ic_launcher_background,"No", noPending);
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
         notificationManagerCompat.notify(NOTIFICACION_ID,builder.build());
     }
 
-    private void setNoPendingIntent() {
+    private void setNoPendingIntent() {   // METODO QUE VA CON LA ELECCION SI DESEAS ELEGIR EJECUTAR ALGUNA ACCION DESDE LA NOTIFICACION
         Intent intent = new Intent(this, Ubicacion_maps.class);
 
         //Para que al dar hacia atrás vaya a la main y no salga (opcional)
@@ -242,7 +232,7 @@ public class Monitor extends AppCompatActivity {
         noPending = stackBuilder.getPendingIntent(PENDING_REQUEST, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private void setSiPendingIntent() {
+    private void setSiPendingIntent() {  // METODO QUE VA CON LA ELECCION SI DESEAS ELEGIR EJECUTAR ALGUNA ACCION DESDE LA NOTIFICACION
         Intent intent = new Intent(this, Ubicacion_maps.class);
 
         //Para que al dar hacia atrás vaya a la main y no salga (opcional)
