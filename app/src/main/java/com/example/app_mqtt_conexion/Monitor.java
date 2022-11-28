@@ -36,7 +36,8 @@ public class Monitor extends AppCompatActivity {
     MqttAndroidClient client;
     TextView oxigeno;                                           //DECLARACION DE VARIABLES A UTILIZAR DE DIFERENTES TIPOS
     TextView pulsaciones;
-
+    double latitud = -33.514233;
+    double longitud = -70.589819;
     //variables a utilizar para las notificaciones
 
     private static final String CHANNEL_ID = "NOTIFICACION";
@@ -152,6 +153,8 @@ public class Monitor extends AppCompatActivity {
                     }
 
 
+
+                    //latitud= Double.parseDouble(lat);
 
                 }
             }
