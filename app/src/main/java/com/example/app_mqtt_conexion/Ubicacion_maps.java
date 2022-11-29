@@ -1,6 +1,7 @@
 package com.example.app_mqtt_conexion;
 
 import android.content.Intent;
+import android.location.GpsStatus;
 import android.os.Bundle;
 import android.os.Message;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ComponentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -16,23 +18,16 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;            // LIBRERIAS PARA CONECTAR ANDROID CON EL SERVIDOR MQTT
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import java.util.Objects;
+
 
 
 public class Ubicacion_maps extends Monitor implements OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {   // APLICAMOS  HERENCIA
 
+
     EditText txtLatitud, txtLongitud;
     GoogleMap mMap;
-    MqttAndroidClient client;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +49,6 @@ public class Ubicacion_maps extends Monitor implements OnMapReadyCallback, Googl
 
 
 
-
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         this.mMap.setOnMapClickListener(this);
@@ -63,14 +57,11 @@ public class Ubicacion_maps extends Monitor implements OnMapReadyCallback, Googl
 
 
 
-         double latitud1 = latitud;
-        double longitud2 =  longitud;            // VARIABLES TEMPORALES
 
 
         txtLatitud.setText(String.valueOf(latitud));
         txtLongitud.setText(String.valueOf(longitud));
-
-        LatLng GPS = new LatLng( latitud1, longitud2);
+        LatLng GPS = new LatLng( latitud, longitud);
 
         mMap.addMarker(new MarkerOptions().position(GPS).title("Ubicacion de la persona monitoreada "));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(GPS));
@@ -99,17 +90,7 @@ public class Ubicacion_maps extends Monitor implements OnMapReadyCallback, Googl
         mMap.addMarker(new MarkerOptions().position(GPS).title(""));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(GPS));
     }
-    private void setSubscription() {
 
-        try {
-
-            client.subscribe("st/n", 0);  // alerta
-
-
-        } catch (MqttException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 }

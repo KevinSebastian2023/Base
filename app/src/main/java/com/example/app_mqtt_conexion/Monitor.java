@@ -36,10 +36,9 @@ public class Monitor extends AppCompatActivity {
     MqttAndroidClient client;
     TextView oxigeno;                                           //DECLARACION DE VARIABLES A UTILIZAR DE DIFERENTES TIPOS
     TextView pulsaciones;
-    double latitud = -33.514233;
-    double longitud = -70.589819;
+    public double latitud ; //variables temporales
+    public double longitud;
     //variables a utilizar para las notificaciones
-
     private static final String CHANNEL_ID = "NOTIFICACION";
     public static final int NOTIFICACION_ID = 0;
     PendingIntent pendingIntent;                                          // VARIABLES Y CANAL DE LA NOTIFICACION QUE USAREMOS
@@ -107,6 +106,19 @@ public class Monitor extends AppCompatActivity {
                     pulsaciones.setText(new String(message.getPayload()));  // Recibimos el mensaje desde el MQTT en un recurso de texto tipo Texview para ser mostrado por pantalla al usuario
 
                 }
+                if (Objects.equals(topic, "st/latitud")) {
+
+                    String lat = message.toString();
+                    latitud= Double.parseDouble(lat);
+
+                }
+                if (Objects.equals(topic, "st/longitud")) {
+
+                    String lon = message.toString();
+                    longitud= Double.parseDouble(lon);
+
+                    Toast.makeText(Monitor.this, "Conectado con GPS ", Toast.LENGTH_LONG).show();
+                }
 
 
                 if (Objects.equals(topic, "st/ir")) {
@@ -154,7 +166,7 @@ public class Monitor extends AppCompatActivity {
 
 
 
-                    //latitud= Double.parseDouble(lat);
+
 
                 }
             }
@@ -174,6 +186,8 @@ public class Monitor extends AppCompatActivity {
             client.subscribe("st/ir", 0); //sensor de nivel de oxigeno
             client.subscribe("st/r", 0);  //sensor de pulsaciones por minuto
             client.subscribe("st/n", 0);  // alerta
+            client.subscribe("st/latitud", 1);
+            client.subscribe("st/longitud", 1);
 
 
         } catch (MqttException e) {
@@ -242,6 +256,7 @@ public class Monitor extends AppCompatActivity {
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(Ubicacion_maps.class);
         stackBuilder.addNextIntent(intent);
+
 
 
         pendingIntent = stackBuilder.getPendingIntent(PENDING_REQUEST, PendingIntent.FLAG_UPDATE_CURRENT);
